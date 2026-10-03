@@ -1,16 +1,91 @@
-# React + Vite
+# 🍽️ กินไรดี (WhatToEat) — ระบบโหวตเมนูอาหารและเครื่องดื่ม
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+เว็บแอปพลิเคชันสำหรับสร้างรายการอาหารและเปิดโหวตในที่ทำงานหรือกลุ่มเพื่อน เพื่อแก้ปัญหาโลกแตกอย่าง **"มื้อนี้กินอะไรดี?"** ทำงานในรูปแบบ Local Mode โดยจัดเก็บข้อมูลทั้งหมดผ่าน `localStorage` ของเบราว์เซอร์ ใช้งานได้ทันทีโดยไม่ต้องเชื่อมต่อฐานข้อมูลภายนอก
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ ฟีเจอร์หลัก (Features)
 
-## React Compiler
+- **เพิ่มเมนูอาหารได้อิสระ:** ระบุชื่อเมนู ราคา และอัปโหลดรูปภาพประกอบได้ (พร้อมระบบตรวจสอบชื่อเมนูซ้ำ)
+- **ระบบบีบอัดรูปภาพอัตโนมัติ (Image Compression):** ย่อขนาดภาพด้วย HTML5 Canvas ก่อนแปลงเป็น Base64 เพื่อประหยัดพื้นที่ใน `localStorage`
+- **กติกาโหวต 1 คน 1 เสียง:** จำกัดสิทธิ์การโหวต 1 เสียงต่อเบราว์เซอร์ สามารถยกเลิกเพื่อเปลี่ยนใจโหวตเมนูอื่นได้ก่อนปิดโหวต
+- **อัปเดตผลแบบเรียลไทม์ & สรุปผู้ชนะ (Leaderboard):** แสดงคะแนนโหวตทันทีที่กด และมีหน้าต่างสรุปเมนูอันดับ 1 เมื่อทำการปิดโหวต
+- **รีเซ็ตรอบใหม่ได้ทันที:** ล้างข้อมูลเมนูและผลโหวตทั้งหมดเพื่อเริ่มเปิดโหวตมื้อถัดไปได้ในคลิกเดียว
+- **Clean Minimal UI:** ออกแบบด้วย Tailwind CSS เน้นความเรียบง่าย สะอาดตา และรองรับการแสดงผลทุกขนาดหน้าจอ (Responsive Design)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the Oxlint configuration
+## 🛠️ เทคโนโลยีที่ใช้ (Tech Stack)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+- **Frontend Framework:** React (Vite)
+- **Styling:** Tailwind CSS (v3)
+- **Linter:** Oxlint
+- **Data Persistence:** Browser `localStorage` API
+
+---
+
+## 📂 โครงสร้างโปรเจกต์ (Project Structure)
+
+```text
+vote_menu/
+├── src/
+│   ├── components/
+│   │   ├── Header.jsx              # แถบเมนูด้านบน แสดงสถานะและปุ่มควบคุมหลัก
+│   │   ├── VotingStatusBanner.jsx  # แถบแสดงสถานะสิทธิ์การโหวตของผู้ใช้
+│   │   ├── MenuCard.jsx            # การ์ดแสดงรายละเอียดเมนูอาหารและปุ่มโหวต
+│   │   ├── MenuGrid.jsx            # ตารางจัดเรียงการ์ดเมนูและหน้า Empty State
+│   │   ├── MenuFormModal.jsx       # หน้าต่าง Modal สำหรับเพิ่มเมนูใหม่และอัปโหลดรูป
+│   │   └── LeaderboardModal.jsx    # หน้าต่างสรุปผลโหวตและประกาศเมนูชนะเลิศ
+│   ├── utils/
+│   │   └── imageCompressor.js      # ฟังก์ชันย่อขนาดและบีบอัดรูปภาพด้วย Canvas
+│   ├── App.jsx                     # คอมโพเนนต์หลักและระบบจัดการ State / LocalStorage
+│   ├── index.css                   # ไฟล์ตั้งค่า Tailwind Directives
+│   └── main.jsx                    # จุดเริ่มต้นของแอปพลิเคชัน React
+├── index.html
+├── package.json
+├── tailwind.config.js
+└── vite.config.js
+```
+
+---
+
+## 🚀 การติดตั้งและรันโปรเจกต์ (Getting Started)
+
+### 1. โคลนโปรเจกต์ลงเครื่อง
+```bash
+git clone [https://github.com/](https://github.com/)<your-username>/vote_menu.git
+cd vote_menu
+```
+
+### 2. ติดตั้งแพ็กเกจที่จำเป็น
+```bash
+npm install
+```
+
+### 3. รันเซิร์ฟเวอร์สำหรับพัฒนา (Development Server)
+```bash
+npm run dev
+```
+เปิดเบราว์เซอร์แล้วไปที่ `http://localhost:5173`
+
+---
+
+## 📜 คำสั่งสคริปต์ทั้งหมด (Available Scripts)
+
+ในโปรเจกต์นี้สามารถรันคำสั่งต่าง ๆ ผ่าน `npm` ได้ดังนี้:
+
+| คำสั่ง | คำอธิบาย |
+| :--- | :--- |
+| `npm run dev` | รันเซิร์ฟเวอร์สำหรับพัฒนาด้วย Vite (Hot Module Replacement) |
+| `npm run build` | บิลด์โค้ดสำหรับใช้งานจริง (Production) ลงในโฟลเดอร์ `dist/` |
+| `npm run lint` | ตรวจสอบความถูกต้องและมาตรฐานของโค้ดด้วย **Oxlint** |
+| `npm run preview` | จำลองรันเว็บจากไฟล์ที่บิลด์เสร็จแล้วเพื่อตรวจสอบก่อนนำไปใช้งานจริง |
+
+---
+
+## 💡 วิธีใช้งาน (How to Use)
+
+1. กดปุ่ม **`+ เพิ่มเมนู`** ที่มุมขวาบนเพื่อสร้างรายการอาหาร กรอกชื่อเมนู ราคา และเลือกรูปภาพ (ถ้ามี)
+2. กดปุ่ม **`โหวตเมนูนี้`** บนการ์ดเมนูที่ต้องการ (โหวตได้ 1 เมนู หากต้องการเปลี่ยนให้กด **`ยกเลิกโหวต`** บนแถบแจ้งเตือน)
+3. เมื่อทุกคนโหวตครบแล้ว ให้กดปุ่ม **`ปิดโหวต / ดูผู้ชนะ`** ระบบจะล็อกการโหวตและแสดงหน้าต่างสรุปเมนูที่ได้คะแนนสูงสุดอันดับ 1
+4. กดปุ่ม **`รีเซ็ต`** เมื่อต้องการล้างรายการทั้งหมดเพื่อเริ่มโหวตมื้อใหม่
